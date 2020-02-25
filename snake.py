@@ -11,7 +11,7 @@ def on_grid_random():
 def collision(c1, c2):
     return (c1[0] == c2[0]) and (c1[1] == c2[1])
 
-# Macro definition for snake movement.
+# Definição dos movimentos.
 UP = 0
 RIGHT = 1
 DOWN = 2
@@ -29,7 +29,7 @@ apple_pos = on_grid_random()
 apple = pygame.Surface((10,10))
 apple.fill((255,0,0))
 
-my_direction = LEFT
+direcao = LEFT
 
 clock = pygame.time.Clock()
 
@@ -45,14 +45,14 @@ while not game_over:
             exit()
 
         if event.type == KEYDOWN:
-            if event.key == K_UP and my_direction != DOWN:
-                my_direction = UP
-            if event.key == K_DOWN and my_direction != UP:
-                my_direction = DOWN
-            if event.key == K_LEFT and my_direction != RIGHT:
-                my_direction = LEFT
-            if event.key == K_RIGHT and my_direction != LEFT:
-                my_direction = RIGHT
+            if event.key == K_UP and direcao != DOWN:
+                direcao = UP
+            if event.key == K_DOWN and direcao != UP:
+                direcao = DOWN
+            if event.key == K_LEFT and direcao != RIGHT:
+                direcao = LEFT
+            if event.key == K_RIGHT and direcao != LEFT:
+                direcao = RIGHT
 
     if collision(snake[0], apple_pos):
         apple_pos = on_grid_random()
@@ -77,13 +77,13 @@ while not game_over:
         snake[i] = (snake[i-1][0], snake[i-1][1])
         
     # Actually make the snake move.
-    if my_direction == UP:
+    if direcao == UP:
         snake[0] = (snake[0][0], snake[0][1] - 10)
-    if my_direction == DOWN:
+    if direcao == DOWN:
         snake[0] = (snake[0][0], snake[0][1] + 10)
-    if my_direction == RIGHT:
+    if direcao == RIGHT:
         snake[0] = (snake[0][0] + 10, snake[0][1])
-    if my_direction == LEFT:
+    if direcao == LEFT:
         snake[0] = (snake[0][0] - 10, snake[0][1])
     
     screen.fill((0,0,0))
