@@ -9,10 +9,32 @@ def on_grid_random():
 def collision(c1, c2):
     return (c1[0] == c2[0]) and (c1[1] == c2[1])
 
+def pause():
+    paused = True
+    game_pause_font = font.render("Paused",BRANCO,-100,size="large")
+    game_pause_font = font.render("Press C to continue or Q to quit",BRANCO,25)
+    pygame.display.update()
+    
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                    paused = False
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    quit()
+
 UP = 0
 RIGHT = 1
 DOWN = 2
 LEFT = 3
+
+#Definição das cores
+BRANCO = pygame.Color('white')
+VERMELHO = pygame.Color('red')
 
 #Método de inicialização
 pygame.init()
@@ -22,11 +44,11 @@ pygame.display.set_caption('Snake')
 #Entidades
 snake = [(200, 200), (210, 200), (220, 200)]
 snake_skin = pygame.Surface((10,10))
-snake_skin.fill((255,255,255)) #corBranca
+snake_skin.fill(BRANCO) #corBranca
 
 apple_pos = on_grid_random()
 apple = pygame.Surface((10,10))
-apple.fill((255,0,0)) #corVermelho
+apple.fill(VERMELHO) #corVermelho
 
 #Direções
 direcao = LEFT
@@ -37,6 +59,12 @@ clock = pygame.time.Clock()
 #fonte e placar
 font = pygame.font.Font('freesansbold.ttf', 20)
 score = 0
+
+while not gameExit:
+        if game_over == True:
+            game_exit_font = font.render("Game over", VERMELHO, -50, size="large")
+            game_exit_font = font.render("C to play again, Q to quit", BRANCO, 50, size="medium")
+            pygame.display.update()
 
 #Loop do game.
 game_over = False
@@ -106,7 +134,7 @@ while not game_over:
         pygame.draw.line(screen, (40,40,40), (0,y), (600,y))
         
     #Desenha o placar
-    score_font = font.render('Score: %s' %(score), True, (255,255,255))
+    score_font = font.render('Score: %s' %(score), True, (BRANCO))
     score_rect = score_font.get_rect()
     score_rect.topleft = (600 - 120, 10)
     screen.blit(score_font, score_rect)
@@ -118,15 +146,16 @@ while not game_over:
     #Renderiza o jogo          
     pygame.display.update()
     
+
+    
 while True:
-    game_over_font = pygame.font.Font('freesansbold.ttf', 75) 
-    game_over_screen = game_over_font.render('Game Over', True, (255,255,255))
+    game_over_font = pygame.font.Font('freesansbold.ttf', 75)
+    game_over_screen = game_over_font.render('Game Over', True, (BRANCO))
     game_over_rect = game_over_screen.get_rect()
     game_over_rect.midtop = (600 / 2, 10)
     screen.blit(game_over_screen, game_over_rect)
-    pygame.displayx.update()
+    pygame.display.update()
     pygame.time.wait(500)
-    
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
