@@ -9,7 +9,7 @@ def on_grid_random():
 def collision(c1, c2):
     return (c1[0] == c2[0]) and (c1[1] == c2[1])
 
-def pause():
+"""def pause():
     paused = True
     game_pause_font = font.render("Paused",BRANCO,-100,size="large")
     game_pause_font = font.render("Press C to continue or Q to quit",BRANCO,25)
@@ -25,7 +25,7 @@ def pause():
                     paused = False
                 elif event.key == pygame.K_q:
                     pygame.quit()
-                    quit()
+                    quit()"""
 
 UP = 0
 RIGHT = 1
@@ -60,11 +60,11 @@ clock = pygame.time.Clock()
 font = pygame.font.Font('freesansbold.ttf', 20)
 score = 0
 
-while not gameExit:
+"""while not gameExit:
         if game_over == True:
             game_exit_font = font.render("Game over", VERMELHO, -50, size="large")
             game_exit_font = font.render("C to play again, Q to quit", BRANCO, 50, size="medium")
-            pygame.display.update()
+            pygame.display.update()"""
 
 #Loop do game.
 game_over = False
