@@ -103,8 +103,6 @@ while not game_over:
             game_over = True
             break
         
-    
-    
     if game_over:
         break
     
@@ -142,7 +140,7 @@ while not game_over:
     for pos in snake:
         #Desenha a snake na tela
         screen.blit(snake_skin,pos)   
-             
+        
     #Renderiza o jogo          
     pygame.display.update()
     
